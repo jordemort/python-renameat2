@@ -3,19 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to python-renameat2's documentation!
-============================================
-
-API documentation
------------------
-
-.. automodule:: renameat2
-    :members:
+.. mdinclude:: ../README.md
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   examples.md
+   renameat2.rst
 
 
 Indices and tables
