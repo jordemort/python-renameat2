@@ -1,0 +1,13 @@
+services:
+  manylinux:
+    build:
+      context: .
+      args:
+        ARCH: ${ARCH:-x86_64}
+    environment:
+      PLAT: manylinux1_${ARCH:-x86_64}
+      WHICH_PYTHON: ${WHICH_PYTHON:-cp36-cp36m}
+    volumes:
+      - ..:/mnt
+    tmpfs:
+      - /tmp,exec

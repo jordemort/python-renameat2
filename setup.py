@@ -14,4 +14,4 @@ from setuptools import setup
 #    python_requires=">=3.6",
 # )
 
-setup(cffi_modules=["renameat2_build.py:ffibuilder"])
+setup(cffi_modules=["renameat2_build.py:ffibuilder"], use_scm_version=True)

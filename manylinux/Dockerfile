@@ -1,4 +1,5 @@
-ARG BASE_IMAGE=quay.io/pypa/manylinux2014_x86_64
+ARG ARCH=x86_64
+ARG BASE_IMAGE=quay.io/pypa/manylinux2014_${ARCH}:latest
 
 FROM ${BASE_IMAGE}
 
@@ -8,4 +9,7 @@ RUN rpm --import https://repo.ius.io/RPM-GPG-KEY-IUS-7 && \
     yum install -y yum-plugin-replace && \
     rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org && \
     yum install -y https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm && \
-    yum --enablerepo=elrepo-kernel replace -y kernel-headers --replace-with=kernel-lt-headers
+    yum --enablerepo=elrepo-kernel replace -y kernel-headers --replace-with=kernel-lt-headers && \
+    yum clean all
+
+COPY build-wheel.sh /usr/bin/build-wheel.sh
