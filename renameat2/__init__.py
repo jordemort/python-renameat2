@@ -1,4 +1,4 @@
-"""renameat2 is a wrapper around Linux's `renameat2` system call
+"""renameat2 is a wrapper around Linux's `renameat2` system call.
 
 The most likely reason you might want to use renameat2 is to atomically swap
 two files; the :func:`exchange` function is for you.
@@ -19,6 +19,23 @@ from pathlib import Path
 from typing import Union
 
 from ._renameat2 import lib as _lib, ffi as _ffi
+
+
+def _check_kernel_version():
+    uname = os.uname()
+
+    if uname.sysname != "Linux":
+        raise RuntimeError("renameat2 is Linux-specific")
+
+    kernelver = uname.release.split(".")
+
+    if int(kernelver[0]) < 3:
+        raise RuntimeError("Kernel 3.15 is required to use renameat2")
+    elif int(kernelver[0]) == 3 and int(kernelver[1]) < 15:
+        raise RuntimeError("Kernel 3.15 is required to use renameat2")
+
+
+_check_kernel_version()
 
 
 class Flags(IntFlag):

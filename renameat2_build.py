@@ -13,9 +13,8 @@ ffibuilder.cdef(  # type: ignore
                 unsigned int flags);
     """
 )
-
 ffibuilder.set_source(  # type: ignore
-    "renameat2._renameat2", "", sources=["renameat2.c"]
+    "renameat2._renameat2", "#include <linux/fs.h>", sources=["renameat2.c"]
 )
 
 if __name__ == "__main__":
