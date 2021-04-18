@@ -1,4 +1,6 @@
 __pycache__
-_renameat2.*
 .pytest_cache
+build
+docs/_build
+_renameat2.*
 *.o

@@ -1,4 +1,4 @@
-"""A wrapper around Linux's `renameat2` system call
+"""renameat2 is a wrapper around Linux's `renameat2` system call
 
 The most likely reason you might want to use renameat2 is to atomically swap
 two files; the :func:`exchange` function is for you.
@@ -18,7 +18,7 @@ from enum import IntFlag
 from pathlib import Path
 from typing import Union
 
-from _renameat2 import lib as _lib, ffi as _ffi
+from ._renameat2 import lib as _lib, ffi as _ffi
 
 
 class Flags(IntFlag):
@@ -28,7 +28,7 @@ class Flags(IntFlag):
     different types (e.g., one could be a non-empty directory and the other a symbolic
     link).
 
-    RENAME_NOEXCHANGE can't be used in combination with RENAME_NOREPLACE or
+    RENAME_EXCHANGE can't be used in combination with RENAME_NOREPLACE or
     RENAME_WHITEOUT.
     """
 

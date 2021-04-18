@@ -14,7 +14,9 @@ ffibuilder.cdef(  # type: ignore
     """
 )
 
-ffibuilder.set_source("_renameat2", "", sources=["renameat2.c"])  # type: ignore
+ffibuilder.set_source(  # type: ignore
+    "renameat2._renameat2", "", sources=["renameat2.c"]
+)
 
 if __name__ == "__main__":
     ffibuilder.compile(verbose=True)  # type: ignore
