@@ -1,5 +1,15 @@
 """A wrapper around Linux's `renameat2` system call
+
+The most likely reason you might want to use renameat2 is to atomically swap
+two files; the :func:`exchange` function is for you.
+
+If you just want to rename things with more control than `os.rename`, and/or
+possibly do some weird overlayfs stuff, check out :func:`rename`.
+
+Finally, if you really just like the interface of renameat2 as it's implemented
+in the system call, :func:`renameat2` recreates it in Python.
 """
+
 import errno
 import os
 
@@ -54,11 +64,11 @@ def renameat2(
     :param olddirfd: A directory file descriptor
     :type olddirfd: int
     :param oldpath: The name of a file in the directory represented by olddirfd
-    :type oldpath: bytes
+    :type oldpath: str
     :param newdirfd: A directory file descriptor
     :type newdirfd: int
     :param newpath: The name of a file in the in the directory represented by newdirfd
-    :type newpath: bytes
+    :type newpath: str
     :param flags: A bit mask consisting of zero or more of :data:`RENAME_EXCHANGE`,
         :data:`RENAME_NOREPLACE`, or :data:`RENAME_WHITEOUT`.
     :type flags: int
@@ -91,11 +101,19 @@ def rename(
     replace: bool = True,
     whiteout: bool = False,
 ) -> None:
-    """Rename a file.
+    """Rename a file using the renameat2 system call.
 
-    If you don't need the functionality provided by :data:`RENAME_NOREPLACE`
-    or :data:`RENAME_WHITEOUT` then you might be better off just using
-    :obj:`os.rename`.
+    :param oldpath: Path to the file to rename
+    :type oldpath: Union[pathlib.Path, str]
+    :param newpath: Path to rename the file to
+    :type newpath: Union[pathlib.Path, str]
+    :param replace: If true, any existing file at newpath will be replaced.
+      If false, any existing file at newpath will cause an error to be raised.
+      False corresponds to passing RENAME_NOREPLACE to the system call.
+    :type replace: bool
+    :param whiteout: If true, a "whiteout" file will be left behind at oldpath.
+      True corresponds to passing RENAME_WHITEOUT to the system call.
+    :type whiteout: bool
 
     :raises OSError: if the system call fails
     """
@@ -125,10 +143,12 @@ def exchange(a: Union[Path, str], b: Union[Path, str]) -> None:
     either the call succeeds and the files are exchanged, or the call
     fails and the files are not exchanged.
 
+    This function is implemented by passing RENAME_EXCHANGE to the system call.
+
     :param a: Path to a file
-    :type a: Union[path_lib.Path, str]
+    :type a: Union[pathlib.Path, str]
     :param b: Path to a file
-    :type b: Union[path_lib.Path, str]
+    :type b: Union[pathlib.Path, str]
 
     :raises OSError: if `a` and `b` cannot be swapped
     """
