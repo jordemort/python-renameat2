@@ -1,0 +1,4 @@
+__pycache__
+_renameat2.*
+.pytest_cache
+*.o
