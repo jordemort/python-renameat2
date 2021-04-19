@@ -79,13 +79,14 @@ jobs:
         with:
           path: ./artifacts
 
-      - name: Extract artifacts
+      - name: Rearrange artifacts
         run: |
-          ls -alR ./artifacts
+          mkdir -p dist
+          mv ./artifacts/*/* dist/
 
-      #- name: Publish package to TestPyPI
-      #  uses: pypa/gh-action-pypi-publish@release/v1
-      #  with:
-      #    user: __token__
-      #    password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-      #    repository_url: https://test.pypi.org/legacy/
+      - name: Publish package to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.TEST_PYPI_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
