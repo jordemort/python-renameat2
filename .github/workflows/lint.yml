@@ -1,0 +1,87 @@
+on:
+  pull_request:
+
+name: Lint
+
+jobs:
+  shellcheck:
+    name: shellcheck
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: false
+
+      - name: shellcheck
+        if: always()
+        uses: reviewdog/action-shellcheck@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          exclude: "./.git/*"
+          fail_on_error: true
+
+  markdownlint:
+    name: markdownlint
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: false
+
+      - name: markdownlint
+        uses: reviewdog/action-markdownlint@v0.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          fail_on_error: true
+
+  misspell:
+    name: misspell
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: false
+
+      - name: misspell
+        if: always()
+        uses: reviewdog/action-misspell@v1
+        with:
+          reporter: github-pr-review
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          locale: "US"
+
+  yamllint:
+    name: yamllint
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: false
+
+      - name: yamllint
+        uses: reviewdog/action-yamllint@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+
+  pyflakes:
+    name: pyflakes
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: pyflakes
+        uses: reviewdog/action-pyflakes@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+
+  mypy:
+    name: mypy
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: tsuyoshicho/action-mypy@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review

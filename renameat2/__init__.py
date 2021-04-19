@@ -134,7 +134,7 @@ def rename(
 
     :raises OSError: if the system call fails
     """
-    flags = 0
+    flags = Flags(0)
     if not replace:
         flags |= Flags.RENAME_NOREPLACE
 
