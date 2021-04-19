@@ -12,7 +12,6 @@
    examples.md
    renameat2.rst
 
-
 Indices and tables
 ==================
 

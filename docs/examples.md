@@ -33,6 +33,8 @@ except OSError as e:
 
 ## "Whiteout" a file
 
+I'm not entirely sure why you'd need to do this, but I felt bad leaving it out of the API.
+
 ```python
 from renameat2 import rename
 

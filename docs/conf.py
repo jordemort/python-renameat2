@@ -12,9 +12,12 @@
 #
 import os
 import sys
+from importlib.metadata import version
 
 sys.path.insert(0, os.path.abspath(".."))
 
+release = version("renameat2")
+version = ".".join(release.split(".")[:2])
 
 # -- Project information -----------------------------------------------------
 

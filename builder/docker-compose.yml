@@ -1,7 +1,7 @@
 services:
   manylinux:
     build:
-      context: .
+      context: ./manylinux
       args:
         ARCH: ${ARCH:-x86_64}
     environment:
@@ -9,5 +9,3 @@ services:
       WHICH_PYTHON: ${WHICH_PYTHON:-cp36-cp36m}
     volumes:
       - ..:/mnt
-    tmpfs:
-      - /tmp,exec

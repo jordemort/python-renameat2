@@ -74,7 +74,10 @@ def test_rename_whiteout():
         with open(orange_path, "w") as apple_out:
             apple_out.write("orange")
 
-        renameat2.rename(apple_path, orange_path, whiteout=True)
+        try:
+            renameat2.rename(apple_path, orange_path, whiteout=True)
+        except:
+            raise RuntimeError(f"apple_path = {apple_path} orange_path = {orange_path}")
 
         assert apple_path.is_char_device()
 

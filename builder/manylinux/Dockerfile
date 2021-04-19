@@ -13,3 +13,6 @@ RUN rpm --import https://repo.ius.io/RPM-GPG-KEY-IUS-7 && \
     yum clean all
 
 COPY build-wheel.sh /usr/bin/build-wheel.sh
+
+VOLUME [ "/mnt", "/tmp" ]
+WORKDIR /mnt

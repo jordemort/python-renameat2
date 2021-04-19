@@ -3,8 +3,8 @@
 The most likely reason you might want to use renameat2 is to atomically swap
 two files; the :func:`exchange` function is for you.
 
-If you just want to rename things with more control than `os.rename`, and/or
-possibly do some weird overlayfs stuff, check out :func:`rename`.
+If you just want to rename things with more control than :py:func:`os.rename`,
+and/or possibly do some weird overlayfs stuff, check out :func:`rename`.
 
 Finally, if you really just like the interface of renameat2 as it's implemented
 in the system call, :func:`renameat2` recreates it in Python.
