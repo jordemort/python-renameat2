@@ -42,6 +42,12 @@ jobs:
           WHICH_PYTHON: ${{ matrix.python }}
           ARCH: ${{ matrix.arch }}
 
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.python }}-${{ matrix.arch }}
+          path: dist/*.whl
+
+
   sdist:
     runs-on: ubuntu-20.04
 
@@ -54,3 +60,27 @@ jobs:
 
           docker-compose -f builder/docker-compose.yml build --pull
           docker-compose -f builder/docker-compose.yml run manylinux /opt/python/cp36-cp36m/bin/python3 setup.py sdist
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: sdist
+          path: dist/*.tar.gz
+
+
+  testpypi:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          path: ./artifacts
+
+      - name: Extract artifacts
+        run: |
+          ls -alR ./artifacts
+
+      #- name: Publish package to TestPyPI
+      #  uses: pypa/gh-action-pypi-publish@release/v1
+      #  with:
+      #    user: __token__
+      #    password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+      #    repository_url: https://test.pypi.org/legacy/
