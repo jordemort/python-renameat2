@@ -30,9 +30,14 @@ jobs:
 
       - name: Build manylinux wheel
         run: |
+          set -euo pipefail
+
           if [ "$ARCH" = "aarch64" ]; then
             export PLAT=manylinux2014_aarch64
+          else
+            export PLAT=manylinux1_${ARCH}
           fi
+
           docker-compose -f builder/docker-compose.yml build --pull
           docker-compose -f builder/docker-compose.yml run manylinux build-wheel.sh
         env:
