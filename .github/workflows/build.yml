@@ -103,3 +103,28 @@ jobs:
           user: __token__
           password: ${{ secrets.TEST_PYPI_TOKEN }}
           repository_url: https://test.pypi.org/legacy/
+
+  pypi:
+    runs-on: ubuntu-20.04
+    if: (github.event_name == 'push') && startsWith('refs/tags/v', github.ref)
+
+    needs:
+      - manylinux
+      - sdist
+      - testpypi
+
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          path: ./artifacts
+
+      - name: Rearrange artifacts
+        run: |
+          mkdir -p dist
+          mv ./artifacts/*/* dist/
+
+      - name: Publish package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_TOKEN }}
