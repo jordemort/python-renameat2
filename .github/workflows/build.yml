@@ -69,6 +69,11 @@ jobs:
 
   testpypi:
     runs-on: ubuntu-20.04
+
+    needs:
+      - manylinux
+      - sdist
+
     steps:
       - uses: actions/download-artifact@v2
         with:
