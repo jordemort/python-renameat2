@@ -3,6 +3,10 @@ on:
     branches:
       - main
 
+  push:
+    tags:
+      - 'v*'
+
 name: Build renameat2
 
 jobs:
@@ -27,6 +31,11 @@ jobs:
         uses: docker/setup-qemu-action@v1
 
       - uses: actions/checkout@v2
+
+      - name: Get history and tags for SCM versioning to work
+        run: |
+          git fetch --prune --unshallow
+          git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
       - name: Build manylinux wheel
         run: |
@@ -54,6 +63,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Get history and tags for SCM versioning to work
+        run: |
+          git fetch --prune --unshallow
+          git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
       - name: Build sdist
         run: |
           set -euo pipefail
@@ -69,6 +83,7 @@ jobs:
 
   testpypi:
     runs-on: ubuntu-20.04
+    if: github.event_name == 'pull_request'
 
     needs:
       - manylinux
