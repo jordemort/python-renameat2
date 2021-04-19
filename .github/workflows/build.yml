@@ -104,8 +104,16 @@ jobs:
           password: ${{ secrets.TEST_PYPI_TOKEN }}
           repository_url: https://test.pypi.org/legacy/
 
+      - name: Debug ref
+        run: |
+          echo "github.ref = $GITHUB_REF"
+          echo "is_release? $IS_RELEASE"
+        env:
+          GITHUB_REF: ${{ github.ref }}
+          IS_RELEASE: ${{ startsWith('refs/tags/v', github.ref) }}
+
       - name: Publish package to PyPI
-        if: startsWith('refs/tags/v', github.ref)
+        if: ${{ startsWith('refs/tags/v', github.ref) }}
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
