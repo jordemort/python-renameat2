@@ -16,7 +16,6 @@ jobs:
         if: always()
         uses: reviewdog/action-shellcheck@v1
         with:
-          github_token: ${{ secrets.BOT_GH_TOKEN }}
           reporter: github-pr-review
           exclude: "./.git/*"
           fail_on_error: true
@@ -32,7 +31,6 @@ jobs:
       - name: markdownlint
         uses: reviewdog/action-markdownlint@v0.1
         with:
-          github_token: ${{ secrets.BOT_GH_TOKEN }}
           reporter: github-pr-review
           fail_on_error: true
 
@@ -49,7 +47,6 @@ jobs:
         uses: reviewdog/action-misspell@v1
         with:
           reporter: github-pr-review
-          github_token: ${{ secrets.BOT_GH_TOKEN }}
           locale: "US"
 
   yamllint:
@@ -63,7 +60,6 @@ jobs:
       - name: yamllint
         uses: reviewdog/action-yamllint@v1
         with:
-          github_token: ${{ secrets.BOT_GH_TOKEN }}
           reporter: github-pr-review
 
   pyflakes:
@@ -74,5 +70,4 @@ jobs:
       - name: pyflakes
         uses: reviewdog/action-pyflakes@v1
         with:
-          github_token: ${{ secrets.BOT_GH_TOKEN }}
           reporter: github-pr-review
