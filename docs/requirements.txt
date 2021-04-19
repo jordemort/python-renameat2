@@ -1,5 +1,5 @@
-Sphinx==3.5.4
 importlib-metadata==4.0.0
 myst-parser==0.13.6
 readthedocs-sphinx-search==0.1.0
+Sphinx==3.5.4
 sphinx-rtd-theme==0.5.2

@@ -39,6 +39,8 @@ _check_kernel_version()
 
 
 class Flags(IntFlag):
+    """Bit flags accepted by the ``flags`` parameter of :func:`renameat2.renameat2`"""
+
     RENAME_EXCHANGE = 2
     """
     Atomically exchange oldpath and newpath. Both pathnames must exist but may be of
@@ -54,7 +56,7 @@ class Flags(IntFlag):
     Don't overwrite newpath of the rename. Return an error if newpath already exists.
 
     RENAME_NOREPLACE requires support from the underlying filesystem. See the
-    renameat(2) manpage for more information.
+    :manpage:`renameat(2)` manpage for more information.
     """
 
     RENAME_WHITEOUT = 4
@@ -65,7 +67,7 @@ class Flags(IntFlag):
 
     This operation makes sense only for overlay/union filesystem implementations.
 
-    See the renameat(2) man page for more information.
+    See the :manpage:`renameat(2)` man page for more information.
     """
 
 
@@ -88,7 +90,7 @@ def renameat2(
     :type newpath: str
     :param flags: A bit mask consisting of zero or more of :data:`RENAME_EXCHANGE`,
         :data:`RENAME_NOREPLACE`, or :data:`RENAME_WHITEOUT`.
-    :type flags: int
+    :type flags: Flags
 
     :raises OSError: if the system call fails
     """
