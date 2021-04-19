@@ -14,6 +14,12 @@ This package does not have any libc requirements; glibc includes a wrapper for `
 
 Stableish? It's just a single system call and I can't imagine doing too much more with the interface. I did use this project to brush about 11 years of dust off of my Python packaging techniques, though, so let me know if you see anything amiss. Pull requests are welcome.
 
+## Links
+
+- [Documentation](https://python-renameat2.readthedocs.io/en/latest/)
+- [PyPI](https://pypi.org/project/renameat2/)
+- [GitHub repository](https://github.com/jordemort/python-renameat2)
+
 ## License
 
 This package is provided under the [MIT License](https://github.com/jordemort/python-renameat2/blob/main/LICENSE).
