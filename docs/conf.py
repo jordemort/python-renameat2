@@ -34,12 +34,12 @@ author = "Jordan Webb"
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.coverage",
-    "m2r2",
+    "myst_parser",
     "sphinx_rtd_theme",
     "sphinx.ext.intersphinx",
 ]
 
-source_suffix = [".rst", ".md"]
+# source_suffix = [".rst", ".md"]
 intersphinx_mapping = {"python": ("https://docs.python.org/3", None)}
 
 # Add any paths that contain templates here, relative to this directory.
