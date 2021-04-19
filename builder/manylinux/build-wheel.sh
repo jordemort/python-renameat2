@@ -31,10 +31,10 @@ fi
 tar -C /build/source -xvf "$sdist"
 
 # Install development requirements
-"/opt/python/${WHICH_PYTHON}/bin/pip" install -r /mnt/requirements-dev.txt
+"/opt/python/${WHICH_PYTHON}/bin/pip3" install -r /mnt/requirements-dev.txt
 
 # Compile wheel
-"/opt/python/${WHICH_PYTHON}/bin/pip" wheel /build/source/"$(basename "$sdist" .tar.gz)" --no-deps -w /build/wheel
+"/opt/python/${WHICH_PYTHON}/bin/pip3" wheel /build/source/"$(basename "$sdist" .tar.gz)" --no-deps -w /build/wheel
 
 # Bundle external shared libraries into the wheels
 for whl in /build/wheel/*.whl; do
@@ -43,7 +43,7 @@ done
 
 # Install packages and test
 cp /mnt/renameat2_test.py /bin/renameat2_test.py
-"/opt/python/${WHICH_PYTHON}/bin/pip" install renameat2 --no-index -f /build/fixedwheel
+"/opt/python/${WHICH_PYTHON}/bin/pip3" install renameat2 --no-index -f /build/fixedwheel
 cd / && "/opt/python/${WHICH_PYTHON}/bin/python3" -m pytest /bin/renameat2_test.py
 
 mnt_uid=$(stat -c '%u' /mnt)
