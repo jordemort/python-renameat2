@@ -31,10 +31,8 @@ jobs:
         uses: docker/setup-qemu-action@v1
 
       - uses: actions/checkout@v2
-
-      - name: Get history and tags for SCM versioning to work
-        run: |
-          git fetch --prune --unshallow --tags
+        with:
+          fetch-depth: 0
 
       - name: Build manylinux wheel
         run: |
@@ -61,10 +59,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Get history and tags for SCM versioning to work
-        run: |
-          git fetch --prune --unshallow --tags
+        with:
+          fetch-depth: 0
 
       - name: Build sdist
         run: |
