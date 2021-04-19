@@ -1,0 +1,36 @@
+on:
+  pull_request:
+    branches:
+      - main
+
+name: Build renameat2
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python:
+          - cp36-cp36m
+          - cp37-cp37m
+          - cp38-cp38m
+          - cp39-cp39m
+        arch:
+          - x86_64
+          - i686
+          - aarch64
+          - armv7l
+
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - uses: actions/checkout@v2
+
+      - name: Build sdist
+        run: docker-compose -f builder/docker-compose.yml run manylinux build-wheel.sh
+        env:
+          WHICH_PYTHON: ${{ matrix.python }}
+          ARCH: ${{ matrix.arch }}
