@@ -70,7 +70,7 @@ class Flags(IntFlag):
 
 
 def renameat2(
-    olddirfd: int, oldpath: str, newdirfd: int, newpath: str, flags: int = 0
+    olddirfd: int, oldpath: str, newdirfd: int, newpath: str, flags: Flags = Flags(0)
 ) -> None:
     """A thin wrapper around the renameat2 C library function.
 
