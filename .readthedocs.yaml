@@ -6,6 +6,7 @@ sphinx:
 python:
   version: 3.6
   install:
+    - requirements: requirements-dev.txt
     - method: pip
       path: .
     - requirements: docs/requirements.txt
