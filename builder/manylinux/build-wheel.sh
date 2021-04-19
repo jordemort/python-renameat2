@@ -12,12 +12,10 @@ function errexit() {
   local code="${1:-1}"
   echo "Error in ${BASH_SOURCE[1]}:${BASH_LINENO[0]}. '${BASH_COMMAND}' exited with status $err"
   # Print out the stack trace described by $function_stack
-  if [ ${#FUNCNAME[@]} -gt 2 ]
-  then
+  if [ ${#FUNCNAME[@]} -gt 2 ]; then
     echo "Call tree:"
-    for ((i=1;i<${#FUNCNAME[@]}-1;i++))
-    do
-      echo " $i: ${BASH_SOURCE[$i+1]}:${BASH_LINENO[$i]} ${FUNCNAME[$i]}(...)"
+    for ((i = 1; i < ${#FUNCNAME[@]} - 1; i++)); do
+      echo " $i: ${BASH_SOURCE[$i + 1]}:${BASH_LINENO[$i]} ${FUNCNAME[$i]}(...)"
     done
   fi
   echo "Exiting with status ${code}"
@@ -71,7 +69,7 @@ echo "::endgroup::"
 # Bundle external shared libraries into the wheels
 echo "::group::Repair wheel"
 for whl in /build/wheel/*.whl; do
-    repair_wheel "$whl"
+  repair_wheel "$whl"
 done
 echo "::endgroup::"
 
