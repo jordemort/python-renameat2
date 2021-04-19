@@ -44,7 +44,9 @@ jobs:
             export BASEPLAT=manylinux2014
           fi
 
+          echo "::group::Building builder"
           docker-compose -f builder/docker-compose.yml build --pull
+          echo "::endgroup::Building builder"
           docker-compose -f builder/docker-compose.yml run manylinux build-wheel.sh
         env:
           WHICH_PYTHON: ${{ matrix.python }}
@@ -69,7 +71,9 @@ jobs:
         run: |
           set -euo pipefail
 
+          echo "::group::Building builder"
           docker-compose -f builder/docker-compose.yml build --pull
+          echo "::endgroup::Building builder"
           docker-compose -f builder/docker-compose.yml run manylinux /opt/python/cp36-cp36m/bin/python3 setup.py sdist
 
       - uses: actions/upload-artifact@v2
