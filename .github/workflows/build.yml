@@ -15,8 +15,8 @@ jobs:
         python:
           - cp36-cp36m
           - cp37-cp37m
-          - cp38-cp38m
-          - cp39-cp39m
+          - cp38-cp38
+          - cp39-cp39
         arch:
           - x86_64
           - i686
@@ -33,9 +33,7 @@ jobs:
           set -euo pipefail
 
           if [ "$ARCH" = "aarch64" ]; then
-            export PLAT=manylinux2014_aarch64
-          else
-            export PLAT=manylinux1_${ARCH}
+            export BASEPLAT=manylinux2014
           fi
 
           docker-compose -f builder/docker-compose.yml build --pull
@@ -43,3 +41,16 @@ jobs:
         env:
           WHICH_PYTHON: ${{ matrix.python }}
           ARCH: ${{ matrix.arch }}
+
+  sdist:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build sdist
+        run: |
+          set -euo pipefail
+
+          docker-compose -f builder/docker-compose.yml build --pull
+          docker-compose -f builder/docker-compose.yml run manylinux /opt/python/cp36-cp36m/bin/python3 setup.py sdist
