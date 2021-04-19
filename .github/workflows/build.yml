@@ -6,7 +6,7 @@ on:
 name: Build renameat2
 
 jobs:
-  build:
+  manylinux:
     runs-on: ubuntu-20.04
 
     strategy:
@@ -21,7 +21,6 @@ jobs:
           - x86_64
           - i686
           - aarch64
-          - armv7l
 
     steps:
       - name: Set up QEMU
@@ -29,8 +28,10 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - name: Build sdist
-        run: docker-compose -f builder/docker-compose.yml run manylinux build-wheel.sh
+      - name: Build manylinux wheel
+        run: |
+          docker-compose -f builder/docker-compose.yml build --pull
+          docker-compose -f builder/docker-compose.yml run manylinux build-wheel.sh
         env:
           WHICH_PYTHON: ${{ matrix.python }}
           ARCH: ${{ matrix.arch }}

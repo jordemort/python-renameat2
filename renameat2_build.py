@@ -4,10 +4,6 @@ ffibuilder = FFI()
 
 ffibuilder.cdef(  # type: ignore
     """
-    #define RENAME_EXCHANGE ...
-    #define RENAME_NOREPLACE ...
-    #define RENAME_WHITEOUT ...
-
     int renameat2(int olddirfd, const char *oldpath,
                 int newdirfd, const char *newpath,
                 unsigned int flags);

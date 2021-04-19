@@ -39,7 +39,7 @@ _check_kernel_version()
 
 
 class Flags(IntFlag):
-    RENAME_EXCHANGE: int = _lib.RENAME_EXCHANGE  # type: ignore
+    RENAME_EXCHANGE = 2
     """
     Atomically exchange oldpath and newpath. Both pathnames must exist but may be of
     different types (e.g., one could be a non-empty directory and the other a symbolic
@@ -49,7 +49,7 @@ class Flags(IntFlag):
     RENAME_WHITEOUT.
     """
 
-    RENAME_NOREPLACE: int = _lib.RENAME_NOREPLACE  # type: ignore
+    RENAME_NOREPLACE = 1
     """
     Don't overwrite newpath of the rename. Return an error if newpath already exists.
 
@@ -57,7 +57,7 @@ class Flags(IntFlag):
     renameat(2) manpage for more information.
     """
 
-    RENAME_WHITEOUT: int = _lib.RENAME_WHITEOUT  # type: ignore
+    RENAME_WHITEOUT = 4
     """
     Specifying RENAME_WHITEOUT creates a "whiteout" object at the source of the rename
     at the same time as performing the rename. The whole operation is atomic, so that
