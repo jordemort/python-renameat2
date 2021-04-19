@@ -34,8 +34,7 @@ jobs:
 
       - name: Get history and tags for SCM versioning to work
         run: |
-          git fetch --prune --unshallow
-          git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+          git fetch --prune --unshallow --tags
 
       - name: Build manylinux wheel
         run: |
@@ -65,8 +64,7 @@ jobs:
 
       - name: Get history and tags for SCM versioning to work
         run: |
-          git fetch --prune --unshallow
-          git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+          git fetch --prune --unshallow --tags
 
       - name: Build sdist
         run: |
