@@ -26,7 +26,7 @@ jobs:
       - run: shfmt -i 2 -ci -w .
 
       - name: suggester / shellcheck
-        uses: reviewdog/action-suggester@v1.2
+        uses: reviewdog/action-suggester@v1.4
         with:
           tool_name: shellcheck / shfmt
 
@@ -43,7 +43,7 @@ jobs:
       - run: markdownlint --fix --ignore site/_includes . || true
 
       - name: suggester / markdown
-        uses: reviewdog/action-suggester@v1.2
+        uses: reviewdog/action-suggester@v1.4
         with:
           tool_name: markdownlint-cli
 
@@ -60,7 +60,7 @@ jobs:
       - run: prettier -u -w '**/*.yaml' '**/.*.yaml' '**/*.yml' '**/.*.yml' '**/*.json' '**/*.md' || true
 
       - name: suggester / prettier
-        uses: reviewdog/action-suggester@v1.2
+        uses: reviewdog/action-suggester@v1.4
         with:
           tool_name: prettier
 
@@ -79,6 +79,6 @@ jobs:
           black_args: "."
 
       - name: suggester / black
-        uses: reviewdog/action-suggester@v1.2
+        uses: reviewdog/action-suggester@v1.4
         with:
           tool_name: black
