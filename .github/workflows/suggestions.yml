@@ -73,7 +73,7 @@ jobs:
           submodules: false
 
       - name: Check files using the black formatter
-        uses: rickstaa/action-black@v1.1.5
+        uses: rickstaa/action-black@v1.1.8
         id: action_black
         with:
           black_args: "."
