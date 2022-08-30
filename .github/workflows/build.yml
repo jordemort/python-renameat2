@@ -92,7 +92,7 @@ jobs:
       - sdist
 
     steps:
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           path: ./artifacts
 
