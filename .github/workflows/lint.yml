@@ -8,13 +8,13 @@ jobs:
     name: shellcheck
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: false
 
       - name: shellcheck
         if: always()
-        uses: reviewdog/action-shellcheck@v1.5
+        uses: reviewdog/action-shellcheck@v1.15
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
@@ -25,12 +25,12 @@ jobs:
     name: markdownlint
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: false
 
       - name: markdownlint
-        uses: reviewdog/action-markdownlint@v0.1
+        uses: reviewdog/action-markdownlint@v0.9
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
@@ -40,7 +40,7 @@ jobs:
     name: misspell
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: false
 
@@ -56,7 +56,7 @@ jobs:
     name: yamllint
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: false
 
@@ -70,7 +70,7 @@ jobs:
     name: pyflakes
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: pyflakes
         uses: reviewdog/action-pyflakes@v1
         with:
@@ -81,7 +81,7 @@ jobs:
     name: mypy
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: tsuyoshicho/action-mypy@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
