@@ -52,7 +52,7 @@ jobs:
           WHICH_PYTHON: ${{ matrix.python }}
           ARCH: ${{ matrix.arch }}
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: github.event_name == 'push'
         with:
           name: ${{ matrix.python }}-${{ matrix.arch }}
@@ -76,7 +76,7 @@ jobs:
           echo "::endgroup::Building builder"
           docker-compose -f builder/docker-compose.yml run manylinux /opt/python/cp36-cp36m/bin/python3 setup.py sdist
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: github.event_name == 'push'
         with:
           name: sdist
