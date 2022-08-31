@@ -38,8 +38,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Windows isn't working right now: https://github.com/caketop/python-starlark-go/issues/4
-        # os: [ubuntu-latest, windows-latest, macos-latest]
         os: [ubuntu-latest]
         build: [cp311, cp310, cp39, cp38, cp37, cp36]
 
@@ -47,9 +45,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - uses: actions/setup-go@v3
-        if: runner.os != 'Linux'
 
       - name: Set up QEMU
         if: runner.os == 'Linux'
@@ -62,7 +57,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          path: wheelhouse/starlark_go-*.whl
+          path: wheelhouse/renameat2-*.whl
 
   # Create a GitHub release
   github_release:
