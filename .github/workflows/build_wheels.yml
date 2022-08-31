@@ -62,7 +62,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          path: wheelhouse/starlark_go-*.whl
+          path: wheelhouse/renameat2-*.whl
 
   # Create a GitHub release
   github_release:
