@@ -1,6 +1,21 @@
 [build-system]
-requires = ["setuptools >= 40.6.0", "cffi", "wheel", "setuptools_scm[toml]>=3.4"]
+requires = [
+  "setuptools >= 40.6.0",
+  "cffi",
+  "wheel",
+  "setuptools_scm[toml]>=3.4",
+]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
 local_scheme = "no-local-version"
+
+[tool.isort]
+profile = "black"
+lines_between_types = 1
+
+[tool.cibuildwheel]
+build = "cp37-* cp38-* cp39-* cp310-* cp311-*"
+
+[tool.cibuildwheel.linux]
+archs = ["x86_64", "i686", "aarch64"]
