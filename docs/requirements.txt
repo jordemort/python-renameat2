@@ -1,4 +1,4 @@
-importlib-metadata==4.12.0
+importlib-metadata==5.0.0
 myst-parser==0.18.1
 readthedocs-sphinx-search==0.1.2
 Sphinx==5.2.3
