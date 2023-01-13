@@ -14,7 +14,7 @@ jobs:
 
       - name: shellcheck
         if: always()
-        uses: reviewdog/action-shellcheck@v1.15
+        uses: reviewdog/action-shellcheck@v1.16
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
